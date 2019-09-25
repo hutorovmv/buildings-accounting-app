@@ -8,7 +8,7 @@ namespace BuildingsInfo.EF.DataContext
     {
         public BuildingsContext() : base("BuildingsConnection")
         {
-
+            Database.SetInitializer(new ContextInitializer());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
