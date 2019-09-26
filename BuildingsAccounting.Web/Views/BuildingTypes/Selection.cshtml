@@ -1,0 +1,19 @@
+﻿@model IEnumerable<BuildingsAccounting.Web.Models.BuildingTypeTableModel>
+@{
+    ViewBag.Title = "Відбір типів будівель";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <section id="parameters" class="col-2 bg-white text-dark px-3 py-4">
+            <h3 class="mb-3">Параметри</h3>
+            @Html.Partial("_SelectionForm")
+        </section>
+        <section id="data" class="col-10">
+            @*<div class="text-center">
+                    <div id="loading" class="spinner-grow mt-4 text-primary" style="display: none" role="status"></div>
+                </div>*@
+            @Html.Partial("_ShowCards", Model)
+        </section>
+    </div>
+</div>

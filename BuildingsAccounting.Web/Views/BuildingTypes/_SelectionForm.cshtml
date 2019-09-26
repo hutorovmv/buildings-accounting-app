@@ -1,0 +1,22 @@
+﻿@using (Ajax.BeginForm("_SelectData", new AjaxOptions
+{
+    UpdateTargetId = "data",
+    LoadingElementId = "loading",
+    LoadingElementDuration = 1000
+}))
+{
+    <div class="mt-3">
+        <span class="lead pl-1">Назва</span><br />
+        <input type="text" class="form-control w-100 my-1" name="selName" />
+    </div>
+    <div>
+        <input type="submit" class="form-control w-100 mt-1 btn-warning" value="Відібрати" />
+    </div>
+    <div class="mt-3">
+        <span class="lead pl-1">Батьківський тип будівлі</span><br />
+        @Html.DropDownList("selParentType", ViewBag.selTypeName as SelectList, new { @class = "form-control w-100 my-1" })
+    </div>
+    <div id="loading" class="load" style="display: none">
+        <p>Завантаження даних...</p>
+    </div>
+}

@@ -11,27 +11,31 @@ namespace BuildingsAccounting.Web.Controllers
 {
     public class BuildingTypesController : Controller
     {
-        private IEnumerable<BuildingType> objects;
-        private IEnumerable<BuildingTypeTableModel> tableModelObjects; 
-
-        public IEnumerable<BuildingType> Objects
-        {
-            get { return objects; }
-            set
-            {
-                objects = value;
-                tableModelObjects = objects.Select(e => (BuildingTypeTableModel)e).OrderBy(e => e.Name);
-            }
-        }
-
-        public BuildingTypesController()
-        {
-            Objects = UowCreator.Uow.BuildingTypeRepository.GetAll();
-        }
-
         public ViewResult Browse()
         {
-            return View(tableModelObjects);
+            return View(ToTableModels(UowCreator.Uow.BuildingTypeRepository.GetAll()));
+        }
+
+        public ViewResult Selection()
+        {
+            ViewBag.selParentType = UowCreator.Uow.BuildingTypeRepository.GetExistingParentTypes().Select(e => new SelectListItem
+            {
+                Text = e,
+                Value = e
+            }).ToList();
+            return View(ToTableModels(UowCreator.Uow.BuildingTypeRepository.GetAll()));
+        }
+
+        public PartialViewResult _SelectData(string selName, string selParentType)
+        {
+            var model = UowCreator.Uow.BuildingTypeRepository.Filter(selName, selParentType);
+
+            return PartialView("_ShowCards", ToTableModels(model));
+        }
+
+        public static IEnumerable<BuildingTypeTableModel> ToTableModels(IEnumerable<BuildingType> objects)
+        {
+            return objects.Select(e => (BuildingTypeTableModel)e);
         }
     }
 }

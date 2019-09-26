@@ -12,7 +12,6 @@ namespace BuildingsAccounting.Web.Controllers
     public class BuildingsController : Controller
     {
        
-
         public ViewResult Browse()
         {
             return View(ToTableModels(UowCreator.Uow.BuildingRepository.GetAll()));

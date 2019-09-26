@@ -195,6 +195,9 @@
     <Content Include="Views\Buildings\Selection.cshtml" />
     <Content Include="Views\Buildings\_SelectionForm.cshtml" />
     <Content Include="Views\Buildings\_ShowCards.cshtml" />
+    <Content Include="Views\BuildingTypes\_ShowCards.cshtml" />
+    <Content Include="Views\BuildingTypes\_SelectionForm.cshtml" />
+    <Content Include="Views\BuildingTypes\Selection.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
