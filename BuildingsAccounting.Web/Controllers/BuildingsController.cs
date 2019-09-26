@@ -11,28 +11,35 @@ namespace BuildingsAccounting.Web.Controllers
 {
     public class BuildingsController : Controller
     {
-        private IEnumerable<Building> objects;
-        private IEnumerable<BuildingTableModel> tableModelObjects;
-
-        public IEnumerable<Building> Objects
-        {
-            get { return objects; }
-
-            set
-            {
-                objects = value;
-                tableModelObjects = objects.Select(e => (BuildingTableModel)e).OrderBy(e => e);
-            }
-        }
-
-        public BuildingsController()
-        {
-            Objects = UowCreator.Uow.BuildingRepository.GetAll();
-        }
+       
 
         public ViewResult Browse()
         {
-            return View(tableModelObjects);
+            return View(ToTableModels(UowCreator.Uow.BuildingRepository.GetAll()));
+        }
+
+        public ViewResult Selection()
+        {
+            ViewBag.selTypeName = UowCreator.Uow.BuildingRepository.GetUsedTypeNames().Select(e => new SelectListItem
+            {
+                Text = e,
+                Value = e
+            }).ToList();
+            return View(ToTableModels(UowCreator.Uow.BuildingRepository.GetAll()));
+        }
+
+        public PartialViewResult _SelectData(string selAddress, string selTypeName, 
+            int? floorsNumberFrom, int? floorsNumberTo, double? areaFrom, double? areaTo)
+        {
+            var model = UowCreator.Uow.BuildingRepository.Filter(selAddress, selTypeName, 
+                floorsNumberFrom, floorsNumberTo, areaFrom, areaTo);
+
+            return PartialView("_ShowCards", ToTableModels(model));
+        }
+
+        public static IEnumerable<BuildingTableModel> ToTableModels(IEnumerable<Building> objects)
+        {
+            return objects.Select(e => (BuildingTableModel)e);
         }
     }
 }

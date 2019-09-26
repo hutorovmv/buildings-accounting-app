@@ -192,6 +192,9 @@
     <Content Include="Views\Buildings\_BuildingCard.cshtml" />
     <Content Include="Views\BuildingTypes\Browse.cshtml" />
     <Content Include="Views\BuildingTypes\_BuildingTypeCard.cshtml" />
+    <Content Include="Views\Buildings\Selection.cshtml" />
+    <Content Include="Views\Buildings\_SelectionForm.cshtml" />
+    <Content Include="Views\Buildings\_ShowCards.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
