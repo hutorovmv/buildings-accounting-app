@@ -8,6 +8,9 @@ namespace BuildingsInfo.EF.Repositories
     {
         public BuildingTypeRepository(BuildingsContext context) : base(context) { }
 
-        // ...
+        public string GetName(int id)
+        {
+            return Get(id).Name;
+        }
     }
 }

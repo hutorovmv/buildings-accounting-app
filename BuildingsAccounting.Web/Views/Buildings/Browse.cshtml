@@ -1,0 +1,16 @@
+﻿@model IEnumerable<BuildingsAccounting.Web.Models.BuildingTableModel>
+
+@{
+    ViewBag.Title = "Всі будівлі";
+ }
+
+<h2 class="mt-4 text-center">Всі будівлі</h2>
+
+<div class="container pb-4">
+    <div class="row d-flex justify-content-start align-items-stretch">
+        @foreach (var m in @Model)
+         {
+            @Html.Partial("_BuildingCard", m)
+         }
+    </div>
+</div>

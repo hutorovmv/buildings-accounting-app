@@ -11,6 +11,9 @@ namespace BuildingsAccounting.Web
     {
         protected void Application_Start()
         {
+            Application["DefaultImage"] = "default.jpg";
+            Application["ImagesPath"] = "~/Content/Images/";
+
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }

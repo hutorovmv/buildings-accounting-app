@@ -17,7 +17,7 @@ namespace BuildingsInfo.EF.ModelsConfig
 
             HasMany(p => p.Buildings)
                 .WithRequired(p => p.BuildingType)
-                .HasForeignKey(p => p.BuildingType);
+                .HasForeignKey(p => p.BuildingTypeId);
 
             HasOptional(p => p.Parent)
                 .WithMany(p => p.Children)

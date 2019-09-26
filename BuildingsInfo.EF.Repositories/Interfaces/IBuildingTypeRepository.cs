@@ -5,6 +5,6 @@ namespace BuildingsInfo.EF.Repositories.Interfaces
 {
     public interface IBuildingTypeRepository : IRepository<BuildingType>
     {
-        // ...
+        string GetName(int id);
     }
 }

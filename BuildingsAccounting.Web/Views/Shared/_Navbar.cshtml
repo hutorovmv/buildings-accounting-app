@@ -1,0 +1,63 @@
+﻿<nav class="navbar navbar-expand-lg
+            navbar-dark bg-primary
+            shadow px-2 px-md-5">
+
+    <a class="navbar-brand 
+              d-none d-lg-inline" href="#">
+                ПО "Будівлі": інформація про будівлі з прилеглою територією та типи будівель
+    </a>
+    <a class="navbar-brand 
+              d-none d-sm-inline d-lg-none" href="#">
+                ПО "Будівлі": інформація про будівлі та їх типи
+    </a>
+    <a class="navbar-brand d-sm-none" href="#">ПО "Будівлі"</a>
+
+    <button class="navbar-toggler
+                   my-1 border-0"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNavAltMarkup">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse
+                d-lg-flex flex-lg-row-reverse"
+         id="navbarNavAltMarkup">
+
+        <div class="navbar-nav
+                    d-flex flex-column flex-lg-row
+                    w-lg-100 py-3 py-lg-0 text-center">
+            <div class="dropdown
+                        mr-lg-3">
+                <button type="button"
+                        class="btn btn-outline-light dropdown-toggle
+                               w-100 px-lg-3"
+                        data-toggle="dropdown"
+                        aria-haspopup="true">
+                    Будівлі
+                </button>
+
+                <div class="dropdown-menu mt-2
+                        position-absolute w-100">
+                    @Html.ActionLink("Показати всі", "Browse", "Buildings", null, new { @class = "dropdown-item py-2"})
+                    @*<div class="dropdown-divider mx-3"></div>*@
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button type="button"
+                        class="btn btn-outline-light dropdown-toggle
+                               w-100 px-lg-3 mt-3 mt-lg-0"
+                        data-toggle="dropdown"
+                        aria-haspopup="true">
+                    Типи будівель
+                </button>
+
+                <div class="dropdown-menu mt-2
+                        position-absolute w-100">
+                    @Html.ActionLink("Показати всі", "Browse", "BuildingTypes", null, new { @class = "dropdown-item py-2" })
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
