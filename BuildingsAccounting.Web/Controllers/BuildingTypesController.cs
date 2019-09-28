@@ -16,6 +16,11 @@ namespace BuildingsAccounting.Web.Controllers
             return View(ToTableModels(UowCreator.Uow.BuildingTypeRepository.GetAll()));
         }
 
+        public ViewResult BuildingType(int id)
+        {
+            return View((BuildingTypeInfoModel)UowCreator.Uow.BuildingTypeRepository.Get(id));
+        }
+
         public ViewResult Selection()
         {
             ViewBag.selParentType = UowCreator.Uow.BuildingTypeRepository.GetExistingParentTypes().Select(e => new SelectListItem

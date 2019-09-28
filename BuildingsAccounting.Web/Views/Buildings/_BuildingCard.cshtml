@@ -4,7 +4,7 @@
 @*ml-lg-3*@
 <div class="wrapper p-3 mt-3 mx-auto mx-lg-0 col-8 col-md-5 col-lg-3 d-flex flex-wrap">
     <div class="card shadow">
-        <img src=@Url.Content(HttpContext.Current.Application["ImagesPath"] + Model.Image)
+        <img src=@Url.Content(Model.Image)
              alt="Model.Address" class="card-img-top" />
         <div class="card-body d-flex flex-column justify-content-between">
             <div class="content">
@@ -13,7 +13,7 @@
                 @Html.ValueInfo("Кількість поверхів", Model.FloorsNumber)
                 @Html.ValueInfo("Площа", Model.Area)
             </div>
-            <a href="#" class="btn btn-info stretched-link float-right mt-3 mb-0">Повна інформація</a>
+            <a href=@string.Format("Будівля_{0}", Model.Id) class="btn btn-info stretched-link float-right mt-3 mb-0">Повна інформація</a>
         </div>
     </div>
 </div>

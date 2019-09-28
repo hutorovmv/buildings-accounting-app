@@ -79,7 +79,7 @@ namespace BuildingsInfo.EF.DataContext
                     Area = 14.5,
                     Note = "Земельна ділянка не приватизована",
                     Description = "Будинок з господарськими будівлями",
-                    Photos = new string[] { "1.jpg", "2.png", "3.gif" }
+                    Photos = new string[] { "1.jpg", "2.jpg", "3.jpg" }
                 },
                 new Building()
                 {

@@ -103,6 +103,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\owl.carousel.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -145,10 +146,12 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\owl.carousel.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\script.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -173,7 +176,9 @@
     </Compile>
     <Compile Include="Helpers\InfoHelpers.cs" />
     <Compile Include="Infrastructure\UowCreator.cs" />
+    <Compile Include="Models\BuildingInfoModel.cs" />
     <Compile Include="Models\BuildingTableModel.cs" />
+    <Compile Include="Models\BuildingTypeInfoModel.cs" />
     <Compile Include="Models\BuildingTypeTableModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -198,6 +203,8 @@
     <Content Include="Views\BuildingTypes\_ShowCards.cshtml" />
     <Content Include="Views\BuildingTypes\_SelectionForm.cshtml" />
     <Content Include="Views\BuildingTypes\Selection.cshtml" />
+    <Content Include="Views\Buildings\Building.cshtml" />
+    <Content Include="Views\BuildingTypes\BuildingType.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

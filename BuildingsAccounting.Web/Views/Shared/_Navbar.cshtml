@@ -3,14 +3,14 @@
             shadow px-2 px-md-5">
 
     <a class="navbar-brand 
-              d-none d-lg-inline" href="#">
+              d-none d-lg-inline" href="Будівлі">
                 ПО "Будівлі": інформація про будівлі з прилеглою територією та типи будівель
     </a>
     <a class="navbar-brand 
-              d-none d-sm-inline d-lg-none" href="#">
+              d-none d-sm-inline d-lg-none" href="Будівлі">
                 ПО "Будівлі": інформація про будівлі та їх типи
     </a>
-    <a class="navbar-brand d-sm-none" href="#">ПО "Будівлі"</a>
+    <a class="navbar-brand d-sm-none" href="Будівлі">ПО "Будівлі"</a>
 
     <button class="navbar-toggler
                    my-1 border-0"
@@ -39,9 +39,9 @@
 
                 <div class="dropdown-menu mt-2
                         position-absolute w-100">
-                    @Html.ActionLink("Показати всі", "Browse", "Buildings", null, new { @class = "dropdown-item py-2" })
-                    @Html.ActionLink("Фільтрувати", "Selection", "Buildings", null, new { @class = "dropdown-item py-2" })
                     @*<div class="dropdown-divider mx-3"></div>*@
+                    <a class="dropdown-item py-2" href="Будівлі">Показати всі</a>
+                    <a class="dropdown-item py-2" href="Відбір_Будівель">Фільтрувати</a>
                 </div>
             </div>
 
@@ -56,8 +56,8 @@
 
                 <div class="dropdown-menu mt-2
                         position-absolute w-100">
-                    @Html.ActionLink("Показати всі", "Browse", "BuildingTypes", null, new { @class = "dropdown-item py-2" })
-                    @Html.ActionLink("Фільтрувати", "Selection", "BuildingTypes", null, new { @class = "dropdown-item py-2" })
+                    <a class="dropdown-item py-2" href="Типи_Будівель">Показати всі</a>
+                    <a class="dropdown-item py-2" href="Відбір_Типів_Будівель">Фільтрувати</a>
                 </div>
             </div>
         </div>

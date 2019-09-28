@@ -39,10 +39,13 @@ namespace BuildingsAccounting.Web.Models
         public static explicit operator BuildingTableModel(Building obj)
         {
             string path = HttpContext.Current.Application["ImagesPath"].ToString();
-            string img = HttpContext.Current.Application["DefaultImage"].ToString();
 
-            if (obj.Photos != null && File.Exists(path + obj.Photos[0])) {
-                img += obj.Photos[0];
+            if (obj.Photos != null) {
+                path += obj.Photos[0];
+            }
+            else
+            {
+                path += HttpContext.Current.Application["DefaultImage"].ToString();
             }
 
             return new BuildingTableModel
@@ -52,7 +55,7 @@ namespace BuildingsAccounting.Web.Models
                 BuildingTypeName = UowCreator.Uow.BuildingTypeRepository.GetName(obj.BuildingTypeId),
                 FloorsNumber = obj.FloorsNumber,
                 Area = obj.Area,
-                Image = img
+                Image = path
             };
         }
     }

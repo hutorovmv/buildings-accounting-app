@@ -7,9 +7,9 @@
             <div class="card-body d-flex flex-column justify-content-between">
                 <div class="content">
                     @Html.StringInfo("Назва типу будівлі", Model.Name)
-                    @Html.StringInfo("Назва батьківського типу", Model.ParentName)
+                    @Html.StringInfo("Назва типу вищого рівня", Model.ParentName)
                 </div>
-                <a href="#" class="btn btn-info stretched-link float-right mt-3 mb-0">Повна інформація</a>
+                <a href=@string.Format("Тип_Будівлі_{0}", Model.Id) class="btn btn-info stretched-link float-right mt-3 mb-0">Повна інформація</a>
             </div>
         </div>
     </div>
