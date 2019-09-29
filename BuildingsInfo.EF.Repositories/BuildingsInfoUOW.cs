@@ -1,5 +1,7 @@
 ﻿using BuildingsInfo.EF.DataContext;
 using BuildingsInfo.EF.Repositories.Interfaces;
+using System.Linq;
+using System.Data.Entity.Infrastructure;
 
 namespace BuildingsInfo.EF.Repositories
 {

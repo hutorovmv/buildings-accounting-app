@@ -7,9 +7,17 @@
 <div class="container">
     <div class="row">
         <div class="col-6 px-4 pt-2 pb-5">
+            @using (Html.BeginRouteForm(new { controller = "BuildingsAdmin", action = "Delete", id = Model.Id }))
+            {
+                <div class="btn-group my-2" role="group" aria-label="Basic example">
+                    <a href="Редагувати_Будівлю_@Model.Id" class="btn btn-warning">Редагувати</a>
+                    <button type="submit" class="btn btn-danger">Видалити</button>
+                </div>
+            }
             <h3 class="mt-4">Основна інформація</h3>
             <div class="p-3 mt-3 bg-white rounded shadow">
                 @Html.StringInfo("Тип будівлі", Model.BuildingTypeName)
+                <a href="Тип_Будівлі_@Model.BuildingTypeId" class="btn btn-sm btn-outline-dark mt-1 mb-2">Перейти до типу</a>
                 @Html.StringInfo("Адреса", Model.Address)
                 @Html.ValueInfo("Кількість поверхів", Model.FloorsNumber)
                 @Html.ValueInfo("Площа", Model.Area)
@@ -38,12 +46,15 @@
             }
         </div>
         <div class="col-6 px-4 pt-2 pb-5">
-            <div class="owl-carousel mt-5">
-                @foreach (var item in Model.Photos)
-                {
-                    <img class="item" src="@Url.Content(item)" alt=Model.Address />
-                }
-            </div>
+            @if (Model.Photos != null)
+            {
+                <div class="owl-carousel mt-5">
+                    @foreach (var item in Model.Photos)
+                    {
+                        <img class="item" src="@Url.Content(item)" alt=Model.Address />
+                    }
+                </div>
+            }
         </div>
     </div>
 </div>

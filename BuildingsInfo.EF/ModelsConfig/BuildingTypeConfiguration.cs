@@ -9,11 +9,8 @@ namespace BuildingsInfo.EF.ModelsConfig
         {
             HasKey(p => p.Id);
 
-            Property(p => p.Name)
-                .IsRequired()
-                .IsUnicode();
-            Property(p => p.Description)
-                .IsUnicode();
+            Property(p => p.Name).IsRequired().IsUnicode();
+            Property(p => p.Description).IsUnicode();
 
             HasMany(p => p.Buildings)
                 .WithRequired(p => p.BuildingType)

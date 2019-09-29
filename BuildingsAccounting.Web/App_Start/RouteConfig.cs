@@ -82,6 +82,54 @@ namespace BuildingsAccounting.Web
             );
 
             routes.MapRoute(
+                name: "CreateBuilding",
+                url: "Додати_Будівлю",
+                defaults: new
+                {
+                    controller = "BuildingsAdmin",
+                    action = "Create"
+                }
+            );
+
+            routes.MapRoute(
+                name: "EditBuilding",
+                url: "Редагувати_Будівлю_{id}",
+                defaults: new
+                {
+                    controller = "BuildingsAdmin",
+                    action = "Edit",
+                },
+                constraints: new
+                {
+                    id = @"\d+"
+                }
+            );
+
+            routes.MapRoute(
+                name: "EditBuildingType",
+                url: "Редагувати_Тип_Будівлі_{id}",
+                defaults: new
+                {
+                    controller = "BuildingTypesAdmin",
+                    action = "Edit",
+                },
+                constraints: new
+                {
+                    id = @"\d+"
+                }
+            );
+
+            routes.MapRoute(
+                name: "CreateBuildingType",
+                url: "Додати_Тип_Будівлі",
+                defaults: new
+                {
+                    controller = "BuildingTypesAdmin",
+                    action = "Create"
+                }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Buildings", action = "Browse", id = UrlParameter.Optional }

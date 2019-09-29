@@ -10,9 +10,14 @@
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
 </head>
 <body class="bg-light">
-    @Html.Partial("_Navbar")
-    @RenderBody()
-    @Html.Partial("_Footer")
+    <div class="wrapper">
+        @Html.Partial("_Navbar")
+        <div class="content">
+            @RenderBody()
+        </div>
+        @Html.Partial("_Footer")
+    </div>
+
 
     <script src="https://kit.fontawesome.com/0adb0a49f3.js" crossorigin="anonymous"></script>
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>

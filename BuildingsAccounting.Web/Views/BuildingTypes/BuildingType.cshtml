@@ -7,10 +7,20 @@
 <div class="container">
     <div class="row">
         <div class="col-6 px-4 pt-2 pb-5">
+            @using (Html.BeginRouteForm(new { controller = "BuildingTypesAdmin", action = "Delete", id = Model.Id }))
+            {
+                <div class="btn-group my-2" role="group" aria-label="Basic example">
+                    <a href="Редагувати_Тип_Будівлі_@Model.Id" class="btn btn-warning">Редагувати</a>
+                    <button type="submit" class="btn btn-danger">Видалити</button>
+                </div>
+            }
             <h3 class="mt-4">Основна інформація</h3>
             <div class="p-3 mt-3 bg-white rounded shadow">
                 @Html.StringInfo("Назва", Model.Name)
                 @Html.StringInfo("Назва типу вищого рівня", Model.ParentTypeName)
+                @if (Model.ParentTypeId != null) { 
+                    <a href="Тип_Будівлі_@Model.ParentTypeId" class="btn btn-sm btn-outline-dark mt-1 mb-2">Перейти до типу</a>
+                }
             </div>
 
             @if (Model.DescriptionParagraphs != null)

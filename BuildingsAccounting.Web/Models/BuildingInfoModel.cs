@@ -28,14 +28,15 @@ namespace BuildingsAccounting.Web.Models
                 Area = obj.Area,
                 BuildingTypeId = obj.BuildingTypeId,
                 BuildingTypeName = obj.BuildingType?.Name ?? "(тип не вказано)",
-                Photos = obj.Photos.Select(e => HttpContext.Current.Application["ImagesPath"] + e).ToArray(),
+                Photos = obj.Photos?.Select(e => HttpContext.Current.Application["ImagesPath"] + e).ToArray(),
                 NoteParagraphs = StringToArray(obj.Note),
-                DescriptionParagraphs = StringToArray(obj.Description)
+                DescriptionParagraphs = StringToArray(obj.Description),
             };
         }
 
         public static string[] StringToArray(string str)
         {
+            if (string.IsNullOrWhiteSpace(str)) return null;
             return str.Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
         }
     }

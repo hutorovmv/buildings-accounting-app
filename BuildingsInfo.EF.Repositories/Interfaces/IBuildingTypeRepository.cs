@@ -7,6 +7,7 @@ namespace BuildingsInfo.EF.Repositories.Interfaces
     public interface IBuildingTypeRepository : IRepository<BuildingType>
     {
         string GetName(int id);
+        BuildingType GetByName(string name);
         IEnumerable<string> GetExistingParentTypes();
         IEnumerable<BuildingType> Filter(string name, string parentName);
     }

@@ -169,15 +169,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BuildingsAdminController.cs" />
     <Compile Include="Controllers\BuildingsController.cs" />
+    <Compile Include="Controllers\BuildingTypesAdminController.cs" />
     <Compile Include="Controllers\BuildingTypesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\InfoHelpers.cs" />
     <Compile Include="Infrastructure\UowCreator.cs" />
+    <Compile Include="Models\BuildingEditingModel.cs" />
     <Compile Include="Models\BuildingInfoModel.cs" />
     <Compile Include="Models\BuildingTableModel.cs" />
+    <Compile Include="Models\BuildingTypeEditingModel.cs" />
     <Compile Include="Models\BuildingTypeInfoModel.cs" />
     <Compile Include="Models\BuildingTypeTableModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -205,6 +209,12 @@
     <Content Include="Views\BuildingTypes\Selection.cshtml" />
     <Content Include="Views\Buildings\Building.cshtml" />
     <Content Include="Views\BuildingTypes\BuildingType.cshtml" />
+    <Content Include="Views\BuildingsAdmin\Create.cshtml" />
+    <Content Include="Views\BuildingTypesAdmin\Create.cshtml" />
+    <Content Include="Views\BuildingsAdmin\_EditForm.cshtml" />
+    <Content Include="Views\BuildingsAdmin\Edit.cshtml" />
+    <Content Include="Views\BuildingTypesAdmin\_EditForm.cshtml" />
+    <Content Include="Views\BuildingTypesAdmin\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

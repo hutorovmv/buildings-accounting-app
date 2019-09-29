@@ -15,6 +15,11 @@ namespace BuildingsInfo.EF.Repositories
             return Get(id).Name;
         }
 
+        public BuildingType GetByName(string name)
+        {
+            return GetAll().FirstOrDefault(p => p.Name == name);
+        }
+
         public IEnumerable<string> GetExistingParentTypes()
         {
             List<string> typeNames = new List<string>();
