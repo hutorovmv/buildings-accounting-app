@@ -147,6 +147,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\InfoHelpers.cs" />
+    <Compile Include="Helpers\PaginationHelper.cs" />
     <Compile Include="Infrastructure\UowCreator.cs" />
     <Compile Include="Models\BuildingEditingModel.cs" />
     <Compile Include="Models\BuildingInfoModel.cs" />
@@ -154,6 +155,9 @@
     <Compile Include="Models\BuildingTypeEditingModel.cs" />
     <Compile Include="Models\BuildingTypeInfoModel.cs" />
     <Compile Include="Models\BuildingTypeTableModel.cs" />
+    <Compile Include="Pagination\IPagedList.cs" />
+    <Compile Include="Pagination\PagedList.cs" />
+    <Compile Include="Pagination\PagedListExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

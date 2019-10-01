@@ -22,4 +22,22 @@
     $(document).on("click", ".minus", function () {
         $(this).parent('div').remove();
     });
+
+    $(document).on("click", ".page-item", function() {
+        var value = $(this).find(".page-link").text();
+        $("#index").val(value);
+        $("form").submit();
+    });
+
+    $(document).on("click", ".page-item-prev", function () {
+        var active = $(".active").find(".page-link").text();
+        $("#index").val(active - 1);
+        $("form").submit();
+    });
+
+    $(document).on("click", ".page-item-next", function () {
+        var active = $(".active").find(".page-link").text();
+        $("#index").val(1 + active);
+        $("form").submit();
+    });
 });
