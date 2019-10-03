@@ -25,6 +25,7 @@ namespace BuildingsAccounting.Web.Controllers
 
         public ViewResult BuildingType(int id)
         {
+            ViewBag.Hierarchy = repository.GetItemsTypeHierarchy(id);
             return View((BuildingTypeInfoModel)repository.Get(id));
         }
 

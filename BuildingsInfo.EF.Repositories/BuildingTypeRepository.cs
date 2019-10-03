@@ -45,5 +45,17 @@ namespace BuildingsInfo.EF.Repositories
 
             return model;
         }
+
+        public IEnumerable<(string Name, int Id)> GetItemsTypeHierarchy(int id)
+        {
+            List<(string Name, int Id)> hierarchy = new List<(string Name, int Id)>();
+            for (var item = Get(id); item != null; item = item.Parent)
+            {
+                hierarchy.Add((Name: item.Name, Id: item.Id));
+            }
+
+            hierarchy.Reverse();
+            return hierarchy;
+        }
     }
 }
