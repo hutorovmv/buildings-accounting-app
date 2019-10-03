@@ -37,7 +37,7 @@
 
     $(document).on("click", ".page-item-next", function () {
         var active = $(".active").find(".page-link").text();
-        $("#index").val(1 + active);
+        $("#index").val(1 + parseInt(active));
         $("form").submit();
     });
 });

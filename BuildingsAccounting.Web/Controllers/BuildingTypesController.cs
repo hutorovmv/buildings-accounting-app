@@ -18,9 +18,9 @@ namespace BuildingsAccounting.Web.Controllers
         private static IBuildingsInfoUOW uow = UowCreator.Uow;
         private IBuildingTypeRepository repository = uow.BuildingTypeRepository;
 
-        public ViewResult Browse()
+        public ViewResult Browse(int index = 1)
         {
-            return View(ToTableModels(repository.GetAll()));
+            return View(ToTableModels(repository.GetAll()).ToPagedList(PAGE_SIZE, index));
         }
 
         public ViewResult BuildingType(int id)

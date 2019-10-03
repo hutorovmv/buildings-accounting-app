@@ -15,11 +15,15 @@ namespace BuildingsAccounting.Web
 
             routes.MapRoute(
                 name: "AllBuildings",
-                url: "Будівлі",
+                url: "Будівлі_{index}",
                 defaults: new
                 {
                     controller = "Buildings",
                     action = "Browse"
+                },
+                constraints: new
+                {
+                    index = @"\d+"
                 }
             );
 
@@ -49,11 +53,14 @@ namespace BuildingsAccounting.Web
 
             routes.MapRoute(
                 name: "AllBuildingTypes",
-                url: "Типи_Будівель",
+                url: "Типи_Будівель_{index}",
                 defaults: new
                 {
                     controller = "BuildingTypes",
                     action = "Browse"
+                },
+                constraints: new {
+                    index = @"\d+"
                 }
             );
 

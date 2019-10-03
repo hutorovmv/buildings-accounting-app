@@ -1,8 +1,17 @@
-﻿@model IEnumerable<BuildingsAccounting.Web.Models.BuildingTableModel>
+﻿@using BuildingsAccounting.Web.Models
+@using BuildingsAccounting.Web.Helpers
+@using BuildingsAccounting.Web.Pagination
+@model BuildingsAccounting.Web.Pagination.PagedList<BuildingTableModel>
+@*@model IEnumerable<BuildingsAccounting.Web.Models.BuildingTableModel>*@
 
 @{
     ViewBag.Title = "Всі будівлі";
- }
+}
+
+@using (@Html.BeginForm("Browse"))
+{
+    <input id="index" type="hidden" name="index" value="1" />
+}
 
 <h2 class="mt-4 text-center">Всі будівлі</h2>
 

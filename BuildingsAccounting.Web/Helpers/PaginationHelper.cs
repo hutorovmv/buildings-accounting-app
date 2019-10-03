@@ -28,7 +28,7 @@ namespace BuildingsAccounting.Web.Helpers
                 pagination.InnerHtml += prev.ToString();
             }
 
-            for (int i = 1; i < list.TotalPages; i++)
+            for (int i = 1; i <= list.TotalPages; i++)
             {
                 var item = new TagBuilder("li");
                 item.AddCssClass("page-item");            

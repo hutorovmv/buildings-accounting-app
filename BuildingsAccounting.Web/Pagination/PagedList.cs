@@ -24,7 +24,7 @@ namespace BuildingsAccounting.Web.Pagination
             TotalPages = TotalCount / PageSize;
 
             HavePreviousPage = PageIndex > 1;
-            HaveNextPage = PageIndex < TotalPages - 1;
+            HaveNextPage = PageIndex <= TotalPages - 1;
 
             Items = items.Skip(PageSize * PageIndex - 1).Take(PageSize);
         }
