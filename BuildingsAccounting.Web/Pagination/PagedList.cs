@@ -21,7 +21,7 @@ namespace BuildingsAccounting.Web.Pagination
             PageSize = pageSize;
 
             TotalCount = items.Count();
-            TotalPages = TotalCount / PageSize;
+            TotalPages = Convert.ToInt32(Math.Ceiling((double)TotalCount / (double)PageSize));
 
             HavePreviousPage = PageIndex > 1;
             HaveNextPage = PageIndex <= TotalPages - 1;

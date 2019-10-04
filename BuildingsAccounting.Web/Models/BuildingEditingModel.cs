@@ -37,7 +37,6 @@ namespace BuildingsAccounting.Web.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        [ScaffoldColumn(false)]
         public string[] Photos { get; set; }
 
         public IEnumerable<HttpPostedFileBase> Files { get; set; }
@@ -48,12 +47,12 @@ namespace BuildingsAccounting.Web.Models
             {
                 Id = obj.Id,
                 Address = obj.Address,
-                BuildingTypeName = obj.BuildingType.Name,
+                BuildingTypeName = obj.BuildingType?.Name,
                 FloorsNumber = obj.FloorsNumber,
                 Area = obj.Area,
                 Note = obj.Note,
                 Description = obj.Description,
-                Photos = obj.Photos
+                Photos = obj?.Photos
             };
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,6 +20,8 @@ namespace BuildingsAccounting.Web.Controllers
         public ViewResult Create()
         {
             ViewBag.BuildingTypeName = SelectTypeNames(btRepository);
+            TempData["Controller"] = "BuildingsAdmin";
+            TempData["Action"] = "Create";
             return View(new BuildingEditingModel());
         }
 
@@ -43,6 +46,8 @@ namespace BuildingsAccounting.Web.Controllers
         {
             var model = (BuildingEditingModel)repository.Get(id);
             ViewBag.BuildingTypeName = SelectTypeNames(btRepository);
+            TempData["Controller"] = "BuildingsAdmin";
+            TempData["Action"] = "Edit";
             return View(model);
         }
 
@@ -55,6 +60,7 @@ namespace BuildingsAccounting.Web.Controllers
                 return View(model);
             }
 
+            SaveFiles(model.Files);
             Building obj = CreateBuildingObject(model);
             Building item = repository.Get(obj.Id);
 
@@ -71,14 +77,25 @@ namespace BuildingsAccounting.Web.Controllers
             uow.Save();
 
             TempData["message"] = "Дані про будівлю змінено";
-            return RedirectToAction("Building", "Buildings", new { id = model.Id });
+            //return RedirectToAction("Building", "Buildings", new { id = model.Id });
+            return RedirectToAction("Edit", "BuildingsAdmin", new { id = model.Id });
         }
 
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            repository.Delete(repository.Get(id));
+            Building item = repository.Get(id);
+
+            repository.Delete(item);
             uow.Save();
+            
+            foreach (var f in item.Photos)
+            {
+                string path = Path.Combine((string)HttpContext.Application["ImagesPath"], f);
+                if (System.IO.File.Exists(path))
+                    System.IO.File.Delete(path);
+            }
+
             return RedirectToAction("Browse", "Buildings");
         }
 
@@ -104,18 +121,21 @@ namespace BuildingsAccounting.Web.Controllers
             entityObject.Description = obj.Description;
 
             if (obj.Photos == null)
-                entityObject.Photos = obj.Files.Select(e => e.FileName).ToArray();
+                entityObject.Photos = obj.Files?.Select(e => e.FileName).ToArray();
             else
-                entityObject.Photos = obj.Photos.Union(obj.Files.Select(e => e.FileName)).ToArray();
+                entityObject.Photos = obj.Files != null ? obj.Photos.Union(obj.Files.Select(e => e.FileName)).ToArray() : obj.Photos;
 
             return entityObject;
         }
 
         private void SaveFiles(IEnumerable<HttpPostedFileBase> files)
         {
-            foreach (var f in files)
+            if (files != null)
             {
-                f.SaveAs(Server.MapPath(this.HttpContext.Application["ImagesPath"] + f.FileName));
+                foreach (var f in files)
+                {
+                    f.SaveAs(Server.MapPath(this.HttpContext.Application["ImagesPath"] + f.FileName));
+                }
             }
         }
     }
