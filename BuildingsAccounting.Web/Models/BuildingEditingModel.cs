@@ -37,9 +37,10 @@ namespace BuildingsAccounting.Web.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        [Display(Name = "Зображення")]
-        [DataType(DataType.Upload)]
+        [ScaffoldColumn(false)]
         public string[] Photos { get; set; }
+
+        public IEnumerable<HttpPostedFileBase> Files { get; set; }
 
         public static explicit operator BuildingEditingModel(Building obj)
         {

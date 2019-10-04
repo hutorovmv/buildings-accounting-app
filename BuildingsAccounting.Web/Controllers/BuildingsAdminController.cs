@@ -31,6 +31,7 @@ namespace BuildingsAccounting.Web.Controllers
                 return View(model);
             }
 
+            SaveFiles(model.Files);
             repository.Create(CreateBuildingObject(model));
             uow.Save();
 
@@ -99,10 +100,23 @@ namespace BuildingsAccounting.Web.Controllers
             entityObject.BuildingTypeId = entityObject.BuildingType.Id;
             entityObject.FloorsNumber = obj.FloorsNumber;
             entityObject.Area = obj.Area;
-            entityObject.Photos = obj.Photos;
             entityObject.Note = obj.Note;
             entityObject.Description = obj.Description;
+
+            if (obj.Photos == null)
+                entityObject.Photos = obj.Files.Select(e => e.FileName).ToArray();
+            else
+                entityObject.Photos = obj.Photos.Union(obj.Files.Select(e => e.FileName)).ToArray();
+
             return entityObject;
+        }
+
+        private void SaveFiles(IEnumerable<HttpPostedFileBase> files)
+        {
+            foreach (var f in files)
+            {
+                f.SaveAs(Server.MapPath(this.HttpContext.Application["ImagesPath"] + f.FileName));
+            }
         }
     }
 }
