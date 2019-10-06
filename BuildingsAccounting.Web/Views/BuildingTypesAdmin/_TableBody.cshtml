@@ -1,0 +1,18 @@
+﻿@model IEnumerable<BuildingsAccounting.Web.Models.BuildingTypeTableModel>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParentName)
+        </td>
+        <td class="d-flex flex-column flex-lg-row justify-content-center align-items-stretch">
+            @Html.ActionLink("Редагувати", "Edit", new { id = item.Id }, new { @class = "btn btn-sm btn-warning mx-lg-2 my-2 my-lg-0" })
+            @Html.RouteLink("Подробніше", new { controller = "BuildingTypes", action = "BuildingType", id = item.Id }, new { @class = "btn btn-sm btn-info mx-lg-2 my-2 my-lg-0" })
+            @Ajax.ActionLink("Видалити", "Delete", new { id = item.Id }, new AjaxOptions { HttpMethod = "POST" }, new { @class = "delete btn btn-sm btn-danger mx-lg-2 my-2 my-lg-0" })
+        </td>
+    </tr>
+}

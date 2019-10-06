@@ -4,11 +4,11 @@
 
     <a class="navbar-brand 
               d-none d-lg-inline" href="/Будівлі_1">
-                ПО "Будівлі": інформація про будівлі з прилеглою територією та типи будівель
+                ПО "Будівлі": будівлі з прилеглою територією та типи будівель
     </a>
     <a class="navbar-brand 
               d-none d-sm-inline d-lg-none" href="/Будівлі_1">
-                ПО "Будівлі": інформація про будівлі та їх типи
+                ПО "Будівлі": будівлі та їх типи
     </a>
     <a class="navbar-brand d-sm-none" href="/Будівлі_1">ПО "Будівлі"</a>
 
@@ -27,6 +27,28 @@
         <div class="navbar-nav
                     d-flex flex-column flex-lg-row
                     w-lg-100 py-3 py-lg-0 text-center">
+
+            <div class="btn text-light">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @User.Identity.Name
+                }
+                else
+                {
+                    @: Неавторизований
+                }
+            </div>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Вийти", "Logout", "Account", null, new { @class = "btn btn-danger mr-lg-3 w-100 px-lg-3 my-3 my-lg-0" })
+            }
+            else
+            {
+                @Html.ActionLink("Увійти", "Login", "Account", null, new { @class = "btn btn-warning mr-lg-3 w-100 px-lg-3 my-3 my-lg-0" })
+            }
+
+
             <div class="dropdown
                         mr-lg-3">
                 <button type="button"

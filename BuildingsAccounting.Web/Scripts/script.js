@@ -39,5 +39,9 @@
 
     $(document).on("click", ".minus", function () {
         $(this).parent("div").remove();
-    })
+    });
+
+    $(document).on("click", ".delete", function () {
+        $(this).closest("tr").remove();
+    });
 });

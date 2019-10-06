@@ -6,9 +6,11 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using BuildingsAccounting.Web.Models;
 using BuildingsAccounting.Web.Infrastructure;
+using BuildingsInfo.EF.DataContext;
 using BuildingsInfo.EF.Models;
 using BuildingsInfo.EF.Repositories.Interfaces;
 using BuildingsAccounting.Web.Filters;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace BuildingsAccounting.Web.Controllers
 {
@@ -95,6 +97,14 @@ namespace BuildingsAccounting.Web.Controllers
             }
 
             return RedirectToAction("Login", "Account");
+        }
+
+        public ViewResult ShowOwn()
+        {
+            IEnumerable<BuildingTypeTableModel> model = HttpContext.GetOwinContext()
+                .Get<ApplicationContext>().BuildingTypes
+                .ToList().Select(e => (BuildingTypeTableModel)e);
+            return View(model);
         }
 
         private static IEnumerable<SelectListItem> SelectTypeNames(IBuildingTypeRepository repository)
