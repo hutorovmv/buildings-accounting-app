@@ -7,9 +7,11 @@ using BuildingsAccounting.Web.Models;
 using BuildingsAccounting.Web.Infrastructure;
 using BuildingsInfo.EF.Models;
 using BuildingsInfo.EF.Repositories.Interfaces;
+using BuildingsAccounting.Web.Filters;
 
 namespace BuildingsAccounting.Web.Controllers
 {
+    [ForAuthenticatedOnly]
     public class BuildingTypesAdminController : Controller
     {
         private static IBuildingsInfoUOW uow = UowCreator.Uow;

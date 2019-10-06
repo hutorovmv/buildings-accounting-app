@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="DataContext\BuildingsContext.cs" />
     <Compile Include="DataContext\ContextInitializer.cs" />
+    <Compile Include="Interfaces\IBuildingsContext.cs" />
     <Compile Include="ModelsConfig\BuildingConfiguration.cs" />
     <Compile Include="ModelsConfig\BuildingTypeConfiguration.cs" />
     <Compile Include="Models\Building.cs" />

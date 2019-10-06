@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using BuildingsInfo.EF.DataContext;
 using BuildingsInfo.EF.Models;
 using BuildingsInfo.EF.Repositories.Interfaces;
+using System.Data.Entity;
 
 namespace BuildingsInfo.EF.Repositories
 {
-    public class BuildingTypeRepository : GenericEFRepository<BuildingType>, IBuildingTypeRepository
+    public class BuildingTypeRepository<Context> : GenericEFRepository<BuildingType>, IBuildingTypeRepository where Context : DbContext
     {
-        public BuildingTypeRepository(BuildingsContext context) : base(context) { }
+        public BuildingTypeRepository(Context context) : base(context) { }
 
         public string GetName(int id)
         {

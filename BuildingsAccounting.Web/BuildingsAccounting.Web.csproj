@@ -203,6 +203,7 @@
     <Compile Include="Controllers\BuildingsController.cs" />
     <Compile Include="Controllers\BuildingTypesAdminController.cs" />
     <Compile Include="Controllers\BuildingTypesController.cs" />
+    <Compile Include="Filters\ForAuthenticatedOnly.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

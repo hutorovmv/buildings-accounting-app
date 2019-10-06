@@ -1,19 +1,19 @@
 ﻿using BuildingsInfo.EF.DataContext;
 using BuildingsInfo.EF.Repositories.Interfaces;
 using System.Linq;
-using System.Data.Entity.Infrastructure;
+using System.Data.Entity;
 
 namespace BuildingsInfo.EF.Repositories
 {
-    public class BuildingsInfoUOW : IBuildingsInfoUOW
+    public class BuildingsInfoUOW<Context> : IBuildingsInfoUOW where Context : DbContext
     {
-        private readonly BuildingsContext _context;
+        private readonly Context _context;
 
-        public BuildingsInfoUOW(BuildingsContext context)
+        public BuildingsInfoUOW(Context context)
         {
             _context = context;
-            BuildingRepository = new BuildingRepository(_context);
-            BuildingTypeRepository = new BuildingTypeRepository(_context);
+            BuildingRepository = new BuildingRepository<Context>(_context);
+            BuildingTypeRepository = new BuildingTypeRepository<Context>(_context);
         }
 
         public IBuildingRepository BuildingRepository { get; private set; }

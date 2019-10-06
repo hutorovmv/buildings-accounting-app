@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using BuildingsInfo.EF.DataContext;
 using BuildingsInfo.EF.Models;
 using BuildingsInfo.EF.Repositories.Interfaces;
+using BuildingsInfo.EF.Interfaces;
+using System.Data.Entity;
 
 namespace BuildingsInfo.EF.Repositories
 {
-    public class BuildingRepository : GenericEFRepository<Building>, IBuildingRepository
+    public class BuildingRepository<Context> : GenericEFRepository<Building>, IBuildingRepository where Context : DbContext
     {
-        public BuildingRepository(BuildingsContext context) : base(context) { }
+        public BuildingRepository(Context context) : base(context) { }
 
         public IEnumerable<Building> Filter(string address, string typeName, int? floorsFrom, int? floorsTo, double? areaFrom, double? areaTo)
         {

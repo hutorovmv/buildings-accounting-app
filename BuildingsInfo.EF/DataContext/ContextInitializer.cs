@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using BuildingsInfo.EF.Models;
+using BuildingsInfo.EF.Interfaces;
 
 namespace BuildingsInfo.EF.DataContext
 {
-    public class ContextInitializer : DropCreateDatabaseAlways<BuildingsContext>
+    public class ContextInitializer<Context> : DropCreateDatabaseAlways<Context> where Context : DbContext, IBuildingsContext
     {
-        protected override void Seed(BuildingsContext context)
+        protected override void Seed(Context context)
         {
             context.BuildingTypes.AddRange(new List<BuildingType>
             {
