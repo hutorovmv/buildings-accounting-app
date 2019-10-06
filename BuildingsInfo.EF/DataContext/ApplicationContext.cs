@@ -3,14 +3,13 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using BuildingsInfo.EF.Interfaces;
 using BuildingsInfo.EF.Models;
 using BuildingsInfo.EF.ModelsConfig;
-using BuildingsInfo.EF.DataContext;
 
-namespace BuildingsAccounting.Web.Models
+namespace BuildingsInfo.EF.DataContext
 {
     public class ApplicationContext : IdentityDbContext<ApplicationUser>, IBuildingsContext
     {
         public ApplicationContext() : base("BuildingsConnection") {
-            Database.SetInitializer(new ContextInitializer<ApplicationContext>());
+            //Database.SetInitializer(new ContextInitializer<ApplicationContext>());
         }
 
         public DbSet<Building> Buildings { get; set; }
@@ -20,6 +19,7 @@ namespace BuildingsAccounting.Web.Models
         {
             modelBuilder.Configurations.Add(new BuildingTypeConfiguration());
             modelBuilder.Configurations.Add(new BuildingConfiguration());
+            modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

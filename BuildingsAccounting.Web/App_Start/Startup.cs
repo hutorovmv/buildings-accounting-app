@@ -2,6 +2,8 @@
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.AspNet.Identity;
+using BuildingsInfo.EF.DataContext;
+using BuildingsInfo.EF.Models;
 using BuildingsAccounting.Web.Models;
 
 [assembly: OwinStartup(typeof(BuildingsAccounting.Web.Startup))]

@@ -13,5 +13,8 @@ namespace BuildingsInfo.EF.Models
         public int? ParentId { get; set; }
         public BuildingType Parent { get; set; }
         public ICollection<BuildingType> Children { get; set; }
+
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

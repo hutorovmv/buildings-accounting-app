@@ -2,6 +2,8 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
+using BuildingsInfo.EF.DataContext;
+using BuildingsInfo.EF.Models;
 
 namespace BuildingsAccounting.Web.Models
 {

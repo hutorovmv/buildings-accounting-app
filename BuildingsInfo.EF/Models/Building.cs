@@ -27,5 +27,8 @@ namespace BuildingsInfo.EF.Models
 
         public int BuildingTypeId { get; set; }
         public BuildingType BuildingType { get; set; }
+
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

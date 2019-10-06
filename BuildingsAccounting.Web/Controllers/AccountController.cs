@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using System.Security.Claims;
 using Microsoft.Owin.Security;
 using BuildingsAccounting.Web.Models;
+using BuildingsInfo.EF.Models;
 
 namespace BuildingsAccounting.Web.Controllers
 {

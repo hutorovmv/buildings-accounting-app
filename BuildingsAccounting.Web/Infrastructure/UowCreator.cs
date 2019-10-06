@@ -1,7 +1,7 @@
 ﻿using BuildingsInfo.EF.DataContext;
+using BuildingsInfo.EF.Models;
 using BuildingsInfo.EF.Repositories.Interfaces;
 using BuildingsInfo.EF.Repositories;
-using BuildingsAccounting.Web.Models;
 
 namespace BuildingsAccounting.Web.Infrastructure
 {
@@ -14,9 +14,7 @@ namespace BuildingsAccounting.Web.Infrastructure
             get
             {
                 if (uow == null)
-                {
                     uow = new BuildingsInfoUOW<ApplicationContext>(new ApplicationContext());
-                }
 
                 return uow;
             }
