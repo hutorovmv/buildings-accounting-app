@@ -13,12 +13,12 @@ namespace BuildingsAccounting.Web.Models
 
         [Display(Name = "Адреса")]
         [Required(ErrorMessage = "Потрібно вказати адресу")]
-        [StringLength(100, MinimumLength = 15, ErrorMessage = "Від 15 до 100 символів")]        
+        [StringLength(150, MinimumLength = 15, ErrorMessage = "Від 15 до 100 символів")]        
         public string Address { get; set; }
 
         [Display(Name = "Тип будівлі")]
         [Required(ErrorMessage = "Потрібно вказати тип")]
-        [StringLength(45, MinimumLength = 3, ErrorMessage = "Від 3 до 45 символів")]
+        [StringLength(60, MinimumLength = 3, ErrorMessage = "Від 3 до 60 символів")]
         public string BuildingTypeName { get; set; }
 
         [Display(Name = "Кількість поверхів")]
@@ -39,6 +39,8 @@ namespace BuildingsAccounting.Web.Models
 
         public string[] Photos { get; set; }
 
+        public string UserId { get; set; }
+
         public IEnumerable<HttpPostedFileBase> Files { get; set; }
 
         public static explicit operator BuildingEditingModel(Building obj)
@@ -52,7 +54,8 @@ namespace BuildingsAccounting.Web.Models
                 Area = obj.Area,
                 Note = obj.Note,
                 Description = obj.Description,
-                Photos = obj?.Photos
+                Photos = obj?.Photos,
+                UserId = obj.UserId
             };
         }
     }

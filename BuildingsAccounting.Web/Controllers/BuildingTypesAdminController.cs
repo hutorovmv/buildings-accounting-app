@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using BuildingsAccounting.Web.Models;
 using BuildingsAccounting.Web.Infrastructure;
 using BuildingsInfo.EF.Models;
@@ -35,55 +36,74 @@ namespace BuildingsAccounting.Web.Controllers
             repository.Create(CreateBuildingTypeObject(model));
             uow.Save();
 
+            TempData["message"] = "Дані про тип будівлі збережено";
             return RedirectToAction("Create");
         }
 
-        public ViewResult Edit(int id)
+        public ActionResult Edit(int id)
         {
             var model = (BuildingTypeEditingModel)repository.Get(id);
-            ViewBag.ParentName = SelectTypeNames(repository);
-            return View(model);
+
+            if (User.Identity.GetUserId() == model.UserId)
+            { 
+                ViewBag.ParentName = SelectTypeNames(repository);
+                return View(model);
+            }
+
+            return RedirectToAction("Login", "Account");
         }
 
         [HttpPost]
         public ActionResult Edit(BuildingTypeEditingModel model)
         {
-            if (!ModelState.IsValid)
+            if (User.Identity.GetUserId() == model.UserId)
             {
-                ViewBag.ParentName = SelectTypeNames(repository);
-                return View(model);
+                if (!ModelState.IsValid)
+                {
+                    ViewBag.ParentName = SelectTypeNames(repository);
+                    return View(model);
+                }
+
+                BuildingType obj = CreateBuildingTypeObject(model);
+                BuildingType item = repository.Get(obj.Id);
+
+                item.Name = obj.Name;
+                item.ParentId = obj.ParentId;
+                item.Parent = obj.Parent;
+                item.Description = obj.Description;
+                item.UserId = obj.UserId;
+
+                repository.Update(item);
+                uow.Save();
+
+                TempData["message"] = "Дані про тип будівлі змінено";
             }
 
-            BuildingType obj = CreateBuildingTypeObject(model);
-            BuildingType item = repository.Get(obj.Id);
-
-            item.Name = obj.Name;
-            item.ParentId = obj.ParentId;
-            item.Parent = obj.Parent;
-            item.Description = obj.Description;
-
-            repository.Update(item);
-            uow.Save();
-
-            TempData["message"] = "Дані про тип будівлі змінено";
             return RedirectToAction("BuildingType", "BuildingTypes", new { id = model.Id });
         }
 
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            repository.Delete(repository.Get(id));
-            uow.Save();
-            return RedirectToAction("Browse", "BuildingTypes");
+            BuildingType item = repository.Get(id);
+
+            if (User.Identity.GetUserId() == item.UserId)
+            {
+                repository.Delete(item);
+                uow.Save();
+                return RedirectToAction("Browse", "BuildingTypes");
+            }
+
+            return RedirectToAction("Login", "Account");
         }
 
         private static IEnumerable<SelectListItem> SelectTypeNames(IBuildingTypeRepository repository)
         {
-            return repository.GetAll().Select(e => new SelectListItem
-            {
-                Text = e.Name,
-                Value = e.Name
-            }).ToList();
+            List<string> typeNames = new List<string>();
+            typeNames.Add("---");
+            typeNames.AddRange(repository.GetAll().Select(e => e.Name));
+            
+            return typeNames.Select(e => new SelectListItem { Text = e, Value = e }).ToList();
         }
 
         private BuildingType CreateBuildingTypeObject(BuildingTypeEditingModel obj)
@@ -92,8 +112,9 @@ namespace BuildingsAccounting.Web.Controllers
             entityObject.Id = obj.Id;
             entityObject.Name = obj.Name;
             entityObject.Parent = repository.GetByName(obj.ParentName);
-            entityObject.ParentId = entityObject.Parent.Id;
+            entityObject.ParentId = entityObject.Parent?.Id;
             entityObject.Description = obj.Description;
+            entityObject.UserId = obj.UserId;
             return entityObject;
         }
     }

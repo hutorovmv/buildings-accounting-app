@@ -13,16 +13,18 @@ namespace BuildingsAccounting.Web.Models
 
         [Display(Name = "Назва")]
         [Required(ErrorMessage = "Потрібно вказати назву")]
-        [StringLength(30, MinimumLength = 3, ErrorMessage = "Від 3 до 30 символів")]
+        [StringLength(60, MinimumLength = 3, ErrorMessage = "Від 3 до 60 символів")]
         public string Name { get; set; }
 
         [Display(Name = "Тип вищого рівня")]
-        [StringLength(30, MinimumLength = 3, ErrorMessage = "Від 3 до 30 символів")]
+        [StringLength(60, MinimumLength = 3, ErrorMessage = "Від 3 до 60 символів")]
         public string ParentName { get; set; }
 
         [Display(Name = "Опис")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+
+        public string UserId { get; set; }
 
         public static explicit operator BuildingTypeEditingModel(BuildingType obj)
         {
@@ -31,7 +33,8 @@ namespace BuildingsAccounting.Web.Models
                 Id = obj.Id,
                 Name = obj.Name,
                 ParentName = obj.Parent?.Name,
-                Description = obj.Description
+                Description = obj.Description,
+                UserId = obj.UserId
             };
         }
     }

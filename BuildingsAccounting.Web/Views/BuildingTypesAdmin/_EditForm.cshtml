@@ -1,10 +1,21 @@
-﻿@model BuildingsAccounting.Web.Models.BuildingTypeEditingModel
+﻿@using Microsoft.AspNet.Identity
+@model BuildingsAccounting.Web.Models.BuildingTypeEditingModel
+
+@if (!string.IsNullOrWhiteSpace((string)TempData["message"]))
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @TempData["message"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+    </div>
+}
 
 <h2 class="mt-4 text-center">@ViewBag.Title тип будівлі</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+
+    <input type="hidden" name="UserId" value="@User.Identity.GetUserId()" />
 
     <div class="form-horizontal col-12 col-sm-10 col-md-8 col-lg-5 p-5 mx-auto my-4 bg-white rounded shadow">
 
