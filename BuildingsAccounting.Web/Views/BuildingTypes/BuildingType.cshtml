@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-6 col-sm-10 col-lg-6 px-4 pt-2 pb-5 mx-auto">
+        <div class="col-12 col-sm-11 col-lg-6 px-4 pt-2 pb-5 mx-auto">
             @using (Html.BeginRouteForm(new { controller = "BuildingTypesAdmin", action = "Delete", id = Model.Id }))
             {
                 <div class="btn-group my-2" role="group" aria-label="Basic example">
@@ -35,7 +35,7 @@
                 </div>
             }
         </div>
-        <div class="col-6 col-sm-10 col-lg-6 px-4 pt-2 pb-5 mx-auto">
+        <div class="col-12 col-sm-11 col-lg-6 px-4 pt-2 pb-5 mx-auto">
             @if (Model.ParentTypeId != null)
             {
                 @Html.HierarchyInfo((IEnumerable<(string Name, int Id)>)ViewBag.Hierarchy)
