@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using BuildingsInfo.EF.DataContext;
 using BuildingsInfo.EF.Models;
 using BuildingsAccounting.Web.Models;
 using BuildingsAccounting.Web.Infrastructure;
@@ -38,7 +40,8 @@ namespace BuildingsAccounting.Web.Controllers
             }
 
             //model.Photos = 
-            repository.Create(CreateBuildingObject(model));
+            Building obj = CreateBuildingObject(model);           
+            repository.Create(obj);
             uow.Save();
 
             TempData["message"] = "Дані про будівлю збережено";
@@ -47,10 +50,11 @@ namespace BuildingsAccounting.Web.Controllers
 
         public ActionResult Edit(int id)
         {
-            var model = (BuildingEditingModel)repository.Get(id);
+            Building obj = repository.Get(id);
 
-            if (User.Identity.GetUserId() == model.UserId)
+            if (User.Identity.GetUserId() == obj.UserId)
             {
+                var model = (BuildingEditingModel)obj;
                 ViewBag.BuildingTypeName = SelectTypeNames(btRepository);
                 TempData["Controller"] = "BuildingsAdmin";
                 TempData["Action"] = "Edit";
@@ -62,7 +66,10 @@ namespace BuildingsAccounting.Web.Controllers
         [HttpPost]
         public ActionResult Edit(BuildingEditingModel model)
         {
-            if (User.Identity.GetUserId() == model.UserId)
+            Building obj = CreateBuildingObject(model);
+            Building item = repository.Get(obj.Id);
+
+            if (User.Identity.GetUserId() == item.UserId)
             {
                 if (!ModelState.IsValid)
                 {
@@ -70,19 +77,7 @@ namespace BuildingsAccounting.Web.Controllers
                     return View(model);
                 }
 
-                SaveFiles(model.Files);
-                Building obj = CreateBuildingObject(model);
-                Building item = repository.Get(obj.Id);
-
-                item.Address = obj.Address;
-                item.BuildingTypeId = obj.BuildingTypeId;
-                item.BuildingType = obj.BuildingType;
-                item.FloorsNumber = obj.FloorsNumber;
-                item.Area = obj.Area;
-                item.Photos = obj.Photos;
-                item.Note = obj.Note;
-                item.Description = obj.Description;
-                item.UserId = obj.UserId;
+                ModifyBuilding(item, obj);             
 
                 repository.Update(item);
                 uow.Save();
@@ -102,18 +97,19 @@ namespace BuildingsAccounting.Web.Controllers
             {
                 repository.Delete(item);
                 uow.Save();
-            
-                foreach (var f in item.Photos)
-                {
-                    string path = Path.Combine((string)HttpContext.Application["ImagesPath"], f);
-                    if (System.IO.File.Exists(path))
-                        System.IO.File.Delete(path);
-                }
+                DeleteFiles(item.Photos);
 
                 return RedirectToAction("Browse", "Buildings");
             }
 
             return RedirectToAction("Login", "Account");
+        }
+
+        public ViewResult ShowOwn()
+        {
+            IEnumerable<BuildingTableModel> model = HttpContext.GetOwinContext()
+                .Get<ApplicationContext>().Buildings.ToList().Select(e => (BuildingTableModel)e);
+            return View(model);
         }
 
         private static IEnumerable<SelectListItem> SelectTypeNames(IBuildingTypeRepository repository)
@@ -136,7 +132,8 @@ namespace BuildingsAccounting.Web.Controllers
             entityObject.Area = obj.Area;
             entityObject.Note = obj.Note;
             entityObject.Description = obj.Description;
-            entityObject.UserId = obj.UserId;
+            entityObject.UserId = User.Identity.GetUserId();
+            //entityObject.UserId = obj.UserId;
 
             if (obj.Photos == null)
                 entityObject.Photos = SaveFiles(obj.Files);
@@ -144,6 +141,19 @@ namespace BuildingsAccounting.Web.Controllers
                 entityObject.Photos = obj.Files != null ? obj.Photos.Union(SaveFiles(obj.Files)).ToArray() : obj.Photos;
 
             return entityObject;
+        }
+
+        private static void ModifyBuilding(Building item, Building obj)
+        {
+            item.Address = obj.Address;
+            item.BuildingTypeId = obj.BuildingTypeId;
+            item.BuildingType = obj.BuildingType;
+            item.FloorsNumber = obj.FloorsNumber;
+            item.Area = obj.Area;
+            item.Photos = obj.Photos;
+            item.Note = obj.Note;
+            item.Description = obj.Description;
+            item.UserId = obj.UserId;
         }
 
         private string[] SaveFiles(IEnumerable<HttpPostedFileBase> files)
@@ -164,6 +174,16 @@ namespace BuildingsAccounting.Web.Controllers
             }
 
             return fileNames.ToArray();
+        }
+
+        private void DeleteFiles(string[] photos)
+        {
+            foreach (var f in photos)
+            {
+                string path = HttpContext.Server.MapPath((string)HttpContext.Application["ImagesPath"] + f);
+                if (System.IO.File.Exists(path))
+                    System.IO.File.Delete(path);
+            }
         }
     }
 }

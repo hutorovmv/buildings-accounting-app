@@ -39,7 +39,7 @@ namespace BuildingsAccounting.Web.Models
 
         public string[] Photos { get; set; }
 
-        public string UserId { get; set; }
+        //public string UserId { get; set; }
 
         public IEnumerable<HttpPostedFileBase> Files { get; set; }
 
@@ -55,7 +55,7 @@ namespace BuildingsAccounting.Web.Models
                 Note = obj.Note,
                 Description = obj.Description,
                 Photos = obj?.Photos,
-                UserId = obj.UserId
+                //UserId = obj.UserId
             };
         }
     }

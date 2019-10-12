@@ -15,7 +15,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <input type="hidden" name="UserId" value="@User.Identity.GetUserId()" />
+    @*<input type="hidden" name="UserId" value="@User.Identity.GetUserId()" />*@
 
     <div class="form-horizontal col-12 col-sm-10 col-md-8 col-lg-5 p-5 mx-auto my-4 bg-white rounded shadow">
 
@@ -50,4 +50,8 @@
             </div>
         </div>
     </div>
+}
+
+@{
+    TempData["message"] = null
 }

@@ -18,6 +18,8 @@ namespace BuildingsAccounting.Web.Models
         public string[] NoteParagraphs { get; set; }
         public string[] DescriptionParagraphs { get; set; }
 
+        public string UserId { get; set; }
+
         public static explicit operator BuildingInfoModel(Building obj)
         {
             return new BuildingInfoModel
@@ -28,9 +30,10 @@ namespace BuildingsAccounting.Web.Models
                 Area = obj.Area,
                 BuildingTypeId = obj.BuildingTypeId,
                 BuildingTypeName = obj.BuildingType?.Name ?? "(тип не вказано)",
-                Photos = obj.Photos?.Select(e => HttpContext.Current.Application["ImagesPath"] + e).ToArray(),
+                Photos = obj.Photos,
                 NoteParagraphs = StringToArray(obj.Note),
                 DescriptionParagraphs = StringToArray(obj.Description),
+                UserId = obj.UserId
             };
         }
 

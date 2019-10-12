@@ -1,18 +1,24 @@
-﻿@using BuildingsAccounting.Web.Helpers
+﻿@using Microsoft.AspNet.Identity
+@using BuildingsAccounting.Web.Helpers
 @model BuildingsAccounting.Web.Models.BuildingInfoModel
 @{
     ViewBag.Title = "Будівля";
+    string path = (string)HttpContext.Current.Application["ImagesPath"];
+    string defaultImgName = (string)HttpContext.Current.Application["DefaultImage"];
 }
 
 <div class="container">
     <div class="row">
         <div class="col-12 col-sm-11 col-lg-6 px-4 pt-2 pb-5 mx-auto">
-            @using (Html.BeginRouteForm(new { controller = "BuildingsAdmin", action = "Delete", id = Model.Id }))
+            @if (Model.UserId == User.Identity.GetUserId()) 
             {
-                <div class="btn-group my-2" role="group" aria-label="Basic example">
-                    <a href="Редагувати_Будівлю_@Model.Id" class="btn btn-warning">Редагувати</a>
-                    <button type="submit" class="btn btn-danger">Видалити</button>
-                </div>
+                using (Html.BeginRouteForm(new { controller = "BuildingsAdmin", action = "Delete", id = Model.Id }))
+                {
+                    <div class="btn-group my-2" role="group" aria-label="Basic example">
+                        <a href="Редагувати_Будівлю_@Model.Id" class="btn btn-warning">Редагувати</a>
+                        <button type="submit" class="btn btn-danger">Видалити</button>
+                    </div>
+                }
             }
             <h3 class="mt-4">Основна інформація</h3>
             <div class="p-3 mt-3 bg-white rounded shadow">
@@ -51,7 +57,7 @@
                 <div class="owl-carousel mt-5">
                     @foreach (var item in Model.Photos)
                     {
-                        <img class="item" src="@Url.Content(item)" alt=Model.Address />
+                        @Html.Image(item, "item")
                     }
                 </div>
             }

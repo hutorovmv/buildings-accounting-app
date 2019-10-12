@@ -137,6 +137,26 @@ namespace BuildingsAccounting.Web
             );
 
             routes.MapRoute(
+                name: "ShowOwnBuildings", 
+                url: "Показати_Власні_Будівлі",
+                defaults: new 
+                {
+                    controller = "BuildingsAdmin",
+                    action = "ShowOwn"
+                }
+            );
+
+            routes.MapRoute(
+                name: "ShowOwnBuildingTypes",
+                url: "Показати_Власні_Типи_Будівель",
+                defaults: new
+                {
+                    controller = "BuildingTypesAdmin",
+                    action = "ShowOwn"
+                }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Buildings", action = "Browse", id = UrlParameter.Optional }

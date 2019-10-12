@@ -1,0 +1,28 @@
+﻿@using BuildingsAccounting.Web.Helpers
+@model IEnumerable<BuildingsAccounting.Web.Models.BuildingTableModel>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuildingTypeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FloorsNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Area)
+        </td>
+        <td>
+            @Html.Image(item.Image, "table-image")
+        </td>
+        <td class="d-flex flex-column justify-content-center align-items-stretch">
+            @Html.ActionLink("Редагувати", "Edit", new { id = item.Id }, new { @class = "btn btn-sm btn-warning mx-lg-2 my-2" })
+            @Html.RouteLink("Подробніше", new { controller = "Buildings", action = "Building", id = item.Id }, new { @class = "btn btn-sm btn-info mx-lg-2 my-2" })
+            @Ajax.ActionLink("Видалити", "Delete", new { id = item.Id }, new AjaxOptions { HttpMethod = "POST" }, new { @class = "delete btn btn-sm btn-danger mx-lg-2 my-2" })
+        </td>
+    </tr>
+}

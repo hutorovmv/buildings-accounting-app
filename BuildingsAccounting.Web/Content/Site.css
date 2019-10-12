@@ -87,3 +87,11 @@ html, body {
 .pagination, .page-item, .page-link {
     cursor: pointer !important;
 }
+
+.table-scroll {
+    overflow-x: scroll;
+}
+
+.table-image {
+    max-width: 200px;
+}

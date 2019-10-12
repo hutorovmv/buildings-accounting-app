@@ -207,6 +207,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ImageHelpers.cs" />
     <Compile Include="Helpers\InfoHelpers.cs" />
     <Compile Include="Helpers\PaginationHelper.cs" />
     <Compile Include="Infrastructure\UowCreator.cs" />
@@ -267,6 +268,9 @@
     <Content Include="Views\BuildingTypesAdmin\ShowOwn.cshtml" />
     <Content Include="Views\BuildingTypesAdmin\_TableHead.cshtml" />
     <Content Include="Views\BuildingTypesAdmin\_TableBody.cshtml" />
+    <Content Include="Views\BuildingsAdmin\ShowOwn.cshtml" />
+    <Content Include="Views\BuildingsAdmin\_TableHead.cshtml" />
+    <Content Include="Views\BuildingsAdmin\_TableBody.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

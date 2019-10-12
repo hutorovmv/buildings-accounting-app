@@ -24,7 +24,7 @@ namespace BuildingsAccounting.Web.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        public string UserId { get; set; }
+        //public string UserId { get; set; }
 
         public static explicit operator BuildingTypeEditingModel(BuildingType obj)
         {
@@ -34,7 +34,7 @@ namespace BuildingsAccounting.Web.Models
                 Name = obj.Name,
                 ParentName = obj.Parent?.Name,
                 Description = obj.Description,
-                UserId = obj.UserId
+                //UserId = obj.UserId
             };
         }
     }

@@ -35,7 +35,8 @@ namespace BuildingsAccounting.Web.Controllers
                 return View(model);
             }
 
-            repository.Create(CreateBuildingTypeObject(model));
+            BuildingType obj = CreateBuildingTypeObject(model);
+            repository.Create(obj);
             uow.Save();
 
             TempData["message"] = "Дані про тип будівлі збережено";
@@ -44,10 +45,11 @@ namespace BuildingsAccounting.Web.Controllers
 
         public ActionResult Edit(int id)
         {
-            var model = (BuildingTypeEditingModel)repository.Get(id);
+            BuildingType obj = repository.Get(id);
 
-            if (User.Identity.GetUserId() == model.UserId)
-            { 
+            if (User.Identity.GetUserId() == obj.UserId)
+            {
+                var model = (BuildingTypeEditingModel)obj;
                 ViewBag.ParentName = SelectTypeNames(repository);
                 return View(model);
             }
@@ -58,7 +60,10 @@ namespace BuildingsAccounting.Web.Controllers
         [HttpPost]
         public ActionResult Edit(BuildingTypeEditingModel model)
         {
-            if (User.Identity.GetUserId() == model.UserId)
+            BuildingType obj = CreateBuildingTypeObject(model);
+            BuildingType item = repository.Get(obj.Id);
+
+            if (User.Identity.GetUserId() == item.UserId)
             {
                 if (!ModelState.IsValid)
                 {
@@ -66,15 +71,7 @@ namespace BuildingsAccounting.Web.Controllers
                     return View(model);
                 }
 
-                BuildingType obj = CreateBuildingTypeObject(model);
-                BuildingType item = repository.Get(obj.Id);
-
-                item.Name = obj.Name;
-                item.ParentId = obj.ParentId;
-                item.Parent = obj.Parent;
-                item.Description = obj.Description;
-                item.UserId = obj.UserId;
-
+                ModifyBuildingType(item, obj);
                 repository.Update(item);
                 uow.Save();
 
@@ -124,8 +121,19 @@ namespace BuildingsAccounting.Web.Controllers
             entityObject.Parent = repository.GetByName(obj.ParentName);
             entityObject.ParentId = entityObject.Parent?.Id;
             entityObject.Description = obj.Description;
-            entityObject.UserId = obj.UserId;
+            entityObject.UserId = User.Identity.GetUserId();
+            //entityObject.UserId = obj.UserId;
             return entityObject;
+        }
+
+        private static void ModifyBuildingType(BuildingType item, BuildingType obj)
+        {
+            item.Name = obj.Name;
+            item.ParentId = obj.ParentId;
+            item.Parent = obj.Parent;
+            item.Description = obj.Description;
+            item.UserId = obj.UserId;
+            //item.UserId = User.Identity.GetUserId();
         }
     }
 }
