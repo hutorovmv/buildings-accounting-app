@@ -93,5 +93,6 @@ html, body {
 }
 
 .table-image {
+    margin: 3px;
     max-width: 200px;
 }

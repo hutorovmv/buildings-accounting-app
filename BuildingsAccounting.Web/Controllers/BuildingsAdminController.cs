@@ -105,11 +105,15 @@ namespace BuildingsAccounting.Web.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-        public ViewResult ShowOwn()
+        public ActionResult ShowOwn()
         {
-            IEnumerable<BuildingTableModel> model = HttpContext.GetOwinContext()
-                .Get<ApplicationContext>().Buildings.ToList().Select(e => (BuildingTableModel)e);
-            return View(model);
+            if (User.Identity.IsAuthenticated) {
+                string id = User.Identity.GetUserId();
+                IEnumerable<BuildingTableModel> model = repository.GetUserBuildings(id).Select(e => (BuildingTableModel)e).ToList();
+                return View(model);
+            }
+
+            return RedirectToRoute(new { controller = "Account", action = "Login" });
         }
 
         private static IEnumerable<SelectListItem> SelectTypeNames(IBuildingTypeRepository repository)

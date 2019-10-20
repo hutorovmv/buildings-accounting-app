@@ -8,5 +8,6 @@ namespace BuildingsInfo.EF.Repositories.Interfaces
     {
         IEnumerable<Building> Filter(string address, string typeName, int? floorsFrom, int? floorsTo, double? areaFrom, double? areaTo);
         IEnumerable<string> GetUsedTypeNames();
+        IEnumerable<Building> GetUserBuildings(string UserId);
     }
 }

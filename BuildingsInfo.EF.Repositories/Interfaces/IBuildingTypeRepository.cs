@@ -11,5 +11,6 @@ namespace BuildingsInfo.EF.Repositories.Interfaces
         IEnumerable<string> GetExistingParentTypes();
         IEnumerable<BuildingType> Filter(string name, string parentName);
         IEnumerable<(string Name, int Id)> GetItemsTypeHierarchy(int id);
+        IEnumerable<BuildingType> GetUserBuildingTypes(string UserId);
     }
 }

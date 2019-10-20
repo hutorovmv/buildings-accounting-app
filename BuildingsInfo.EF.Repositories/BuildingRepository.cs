@@ -47,5 +47,10 @@ namespace BuildingsInfo.EF.Repositories
                      .ToList());
             return typeNames;
         }
+
+        public IEnumerable<Building> GetUserBuildings(string UserId)
+        {
+            return GetAll().Where(e => e.UserId == UserId);
+        }
     }
 }

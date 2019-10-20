@@ -58,5 +58,10 @@ namespace BuildingsInfo.EF.Repositories
             hierarchy.Reverse();
             return hierarchy;
         }
+
+        public IEnumerable<BuildingType> GetUserBuildingTypes(string UserId)
+        {
+            return GetAll().Where(e => e.UserId == UserId);
+        }
     }
 }

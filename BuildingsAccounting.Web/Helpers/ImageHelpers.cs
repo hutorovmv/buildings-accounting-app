@@ -18,8 +18,9 @@ namespace BuildingsAccounting.Web.Helpers
             else
                 img.Attributes.Add("src", path + defaultImg);
 
-            foreach (var i in classes.Split(' ')) 
-                img.AddCssClass(i);
+            if (!string.IsNullOrWhiteSpace(classes))
+                foreach (var i in classes.Split(' ')) 
+                    img.AddCssClass(i);
 
             return MvcHtmlString.Create(img.ToString(TagRenderMode.SelfClosing));
         }

@@ -54,12 +54,12 @@
         <div class="col-12 col-sm-11 col-lg-6 px-4 pt-2 pb-5 mx-auto">
             @if (Model.Photos != null)
             {
-                <div class="owl-carousel mt-5">
-                    @foreach (var item in Model.Photos)
-                    {
-                        @Html.Image(item, "item")
-                    }
-                </div>
+                <h3 class="mt-4">Фотографії</h3>
+                foreach (var item in Model.Photos)
+                {
+                    var link = Path.Combine(path, item);
+                    <a data-fancybox="gallery" data-caption="@Model.Address" href="@Url.Content(link)">@Html.Image(item, "table-image")</a>
+                }
             }
         </div>
     </div>
