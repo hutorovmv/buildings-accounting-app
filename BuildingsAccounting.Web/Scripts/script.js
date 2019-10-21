@@ -1,18 +1,4 @@
 ﻿$(document).ready(function () {
-    $('.owl-carousel').owlCarousel({
-        loop: false,
-        margin: 10,
-        nav: true,
-        navText: [
-            '<div class="cntrl bg-light rounded mx-1 p-3"><i class="fas fa-chevron-left text-dark"></i></div>',
-            '<div class="cntrl bg-light rounded mx-1 p-3"><i class="fas fa-chevron-right text-dark"></i></div>'
-        ],
-        responsive: {
-            0: {
-                items: 1
-            }
-        }
-    });
 
     $(document).on("click", ".page-item", function() {
         var value = $(this).find(".page-link").text();
